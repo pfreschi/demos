@@ -6,23 +6,28 @@ library(dplyr)
 library(tidyr)
 
 # Load global data (disease burden in 2015, both sexes, all ages)
-global.data <- read.csv('./data/prepped/global_burden.csv', stringsAsFactors = FALSE)
+global.data <- read.csv('data/prepped/global_burden.csv', stringsAsFactors = FALSE)
 
 # Replace NA as 0 for deaths, ylls, ylds
 # Thanks, SO: http://stackoverflow.com/questions/8161836/how-do-i-replace-na-values-with-zeros-in-an-r-dataframe
 global.data[is.na(global.data)] <- 0
 
 # What disease was responsible for the most burden (by each metric)?
-
+top_n(global.data, 1, wt=global.data$dalys)
+top_n(global.data, 1, wt=global.data$deaths)
+top_n(global.data, 1, wt=global.data$prevalence)
+top_n(global.data, 1, wt=global.data$ylds)
+top_n(global.data, 1, wt=global.data$ylls)
 
 # Using prevalence and YLDs, calculate inferred disability weights (not actual weights in the study)
-
+global.data = mutate(global.data, disability_weight = ylds/prevalence)
 
 # See anything strange about the estimated disability weights?
-
+## there are some disability weights that are infinite, because we have divided by zero!
 
 # Which diseases have more YLDs than YLLs (and ylls > 0)?
-
+global.data %>% 
+  filter(ylds > ylls, ylls > 0)
 
 # How many times higher is the prevalence than the number of deaths for these diseases?
 

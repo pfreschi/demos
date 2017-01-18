@@ -21,8 +21,9 @@ self.harm.data <- self.harm.data %>%
 
 # Subset the data
 
+deathsper1000 <- filter(self.harm.data, Measure == "Deaths per 100,000")
 # Create chart
-
+plot(deathsper1000$age.group, deathsper1000$Value)
 
 
 #######################################################################
@@ -30,5 +31,6 @@ self.harm.data <- self.harm.data %>%
 #######################################################################
 
 # Subset the data
-
+yll <- filter(self.harm.data, Measure == "YLLs per 100,000")
+plot(yll$age.group, yll$Value)
 # Create chart

@@ -2,7 +2,7 @@ library(SASxport)
 library(Hmisc)
 library(dplyr)
 
-
+setwd("~/Documents/INFO498C/demos/nhanes")
 xpt = sasxport.get("data/raw/Y_PAQ.XPT")
 write.csv(xpt, file="data/raw/data-physical.csv")
 

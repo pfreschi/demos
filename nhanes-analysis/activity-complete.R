@@ -1,7 +1,7 @@
 # Calculate survey weighted estimates
 
 # Set up
-setwd('~/Documents/info-498c/demos/nhanes-analysis/')
+setwd('~/Documents/INFO498C/demos/nhanes-analysis/')
 # library(foreign)
 library(survey)
 library(dplyr)
@@ -36,3 +36,5 @@ svytable(~alq101, design=nhanes.weighted)
 
 # Using `prop.table` in conjunction with `svytable`, compute the survey weighted proportions
 prop.table(svytable(~alq101, design=nhanes.weighted))
+
+View(nhanes)
